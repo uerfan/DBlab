@@ -1,0 +1,35 @@
+#pragma once
+#include <vector>
+#include <utility>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+using namespace std;
+const int SUCCESS = 0;
+const int FAILURE = 1;
+
+int getED(string s1,string s2);
+int getJaccardThreshold(string s1,string s2);
+int string2int(string s);
+
+struct keyNode{
+    int flag;
+    keyNode*next;
+};
+struct headNode{
+    string gram;
+    keyNode* next;
+};
+
+class SimSearcher
+{
+public:
+	SimSearcher();
+	~SimSearcher();
+    	string *strSource;
+    	headNode *qGram;
+	int createIndex(const char *filename, unsigned q);
+	int searchJaccard(const char *query, double threshold, std::vector<std::pair<unsigned, double> > &result);
+	int searchED(const char *query, unsigned threshold, std::vector<std::pair<unsigned, unsigned> > &result);
+};
+
